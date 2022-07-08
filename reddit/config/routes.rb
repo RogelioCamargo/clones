@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   root "subs#index"
 	resources :users, only: %i(new create show)
 	resource :session, only: %i(new create destroy)
-	resources :subs, expect: %i(destroy)
+	resources :subs, except: %i(destroy)
+	resources :posts, except: %i(index)
 end
