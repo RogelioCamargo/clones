@@ -10,7 +10,7 @@ class User < ApplicationRecord
 	has_many :subs, 
 		primary_key: :id, 
 		foreign_key: :moderator_id, 
-		class_name: :Sub
+		class_name: :Sub,
 		inverse_of: :moderator
 
 	def self.generate_session_token
