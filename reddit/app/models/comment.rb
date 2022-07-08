@@ -11,7 +11,7 @@ class Comment < ApplicationRecord
 	has_many :child_comments, 
 		primary_key: :id,
 		foreign_key: :paent_comment_id,
-		class_name: :Comment,
+		class_name: :Comment
 
 	belongs_to :parent_comment, 
 		primary_key: :id, 

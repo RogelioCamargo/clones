@@ -14,7 +14,7 @@ class User < ApplicationRecord
 		inverse_of: :moderator
 
 	has_many :posts, inverse_of: :author
-	has_many :comments, inverse_of: :user 
+	has_many :comments, inverse_of: :author 
 
 	def self.generate_session_token
 		begin   
