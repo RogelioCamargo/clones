@@ -1,5 +1,5 @@
 class SubsController < ApplicationController
-	before_action :require_user! 
+	before_action :require_logged_in! 
 	before_action :require_user_owns_sub!, only: %i(edit update)
 
 	def new 

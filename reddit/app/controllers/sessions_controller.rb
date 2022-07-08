@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
-	before_action :require_user!, only: %i(destroy)
-
+	before_action :require_logged_in!, only: %i(destroy)
+	before_action :require_logged_out!, except: %i(destroy)
 	def new 
 		render :new 
 	end

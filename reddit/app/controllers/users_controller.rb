@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	before_action :require_logged_in!, only: %i(show)
+	before_action :require_logged_out!, except: %i(show)
 	def new 
 		@user = User.new 
 		render :new 
