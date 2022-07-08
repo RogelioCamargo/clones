@@ -19,5 +19,21 @@
     <% end %>
   </ul>
 
+	<h2>Comments</h2>
+
+  <a href="<%= new_post_comment_url(@post.id) %>">Comment on this post!</a>
+  <br><br>
+
+  <ul>
+    <% comments_by_parent = @post.comments_by_parent %>
+    <% comments_by_parent[nil].each do |top_level_comment| %>
+      <li>
+        <%= render("comments/comment",
+                   comment: top_level_comment,
+                   comments_by_parent: comments_by_parent) %>
+      </li>
+    <% end %>
+  </ul>
+
   <a href="<%= edit_post_url(@post) if @post.author == current_user %>">Edit</a>
 </div>
