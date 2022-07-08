@@ -13,6 +13,8 @@ class User < ApplicationRecord
 		class_name: :Sub,
 		inverse_of: :moderator
 
+	has_many :posts, inverse_of: :author
+
 	def self.generate_session_token
 		begin   
 			session_token = SecureRandom::urlsafe_base64(16)
