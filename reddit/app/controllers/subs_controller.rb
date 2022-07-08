@@ -10,7 +10,7 @@ class SubsController < ApplicationController
 	def create 
 		@sub = current_user.subs.new(sub_params)
 		if @sub.save 
-			redirect_to subs_url
+			redirect_to sub_url(@sub)
 		else 
 			flash.now[:errors] = @sub.errors.full_messages
 			render :new, status: :unprocessable_entity
