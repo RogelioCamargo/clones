@@ -1,5 +1,8 @@
 class Comment < ApplicationRecord
 	validates :body, presence: true 
+
+	after_initialize :ensure_post_id! 
+	
 	belongs_to :author, 
 		foreign_key: :user_id, 
 		class_name: :User, 
@@ -10,7 +13,7 @@ class Comment < ApplicationRecord
 
 	has_many :child_comments, 
 		primary_key: :id,
-		foreign_key: :paent_comment_id,
+		foreign_key: :parent_comment_id,
 		class_name: :Comment
 
 	belongs_to :parent_comment, 
