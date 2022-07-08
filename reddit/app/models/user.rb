@@ -7,6 +7,12 @@ class User < ApplicationRecord
 
 	attr_reader :password 
 
+	has_many :subs, 
+		primary_key: :id, 
+		foreign_key: :moderator_id, 
+		class_name: :Sub
+		inverse_of: :moderator
+
 	def self.generate_session_token
 		begin   
 			session_token = SecureRandom::urlsafe_base64(16)
