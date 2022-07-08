@@ -6,5 +6,5 @@ Rails.application.routes.draw do
 	resources :users, only: %i(new create show)
 	resource :session, only: %i(new create destroy)
 	resources :subs, except: %i(destroy)
-	resources :posts, except: %i(index)
+	resources :posts, except: %i(index destroy)
 end
