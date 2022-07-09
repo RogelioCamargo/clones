@@ -1,7 +1,24 @@
 <div class="border">
 	<div>
   	<%= @comment.body %> by <%= @comment.author.username %>
+		<%= @comment.votes %> upvotes
 	</div>
+
+	<form action="<%= upvote_comment_url(@comment) %>" method="post">
+    <input
+      type="hidden"
+      name="authenticity_token"
+      value="<%= form_authenticity_token %>">
+    <input type="submit" value="Upvote">
+  </form>
+  <form action="<%= downvote_comment_url(@comment) %>" method="post">
+    <input
+      type="hidden"
+      name="authenticity_token"
+      value="<%= form_authenticity_token %>">
+    <input type="submit" value="Downvote">
+  </form>
+
   <b>Reply to this comment:</b>
   <%= render "form", comment: @new_comment %>
 </div>

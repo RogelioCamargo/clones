@@ -43,6 +43,14 @@ class PostsController < ApplicationController
 		redirect_to subs_url
 	end
 
+	def downvote
+    vote(-1)
+  end
+
+  def upvote
+    vote(1)
+  end
+
 	private 
 
 	def post_params
@@ -52,5 +60,16 @@ class PostsController < ApplicationController
 	def require_user_owns_post!
 		return if current_user.posts.find_by(id: params[:id])
 		render json: 'Forbidden', status: :forbidden
+	end
+
+	def vote(direction)
+		@post = Post.find(params[:id])
+		@user_vote = @post.user_votes.find_or_initialize_by(user: current_user)
+		
+		unless @user_vote.update(value: direction)
+			flash[:errors] = @user_vote.errors.full_messages
+		end
+
+		redirect_to post_url(@post)
 	end
 end

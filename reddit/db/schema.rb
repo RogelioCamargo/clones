@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_08_135428) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_08_202157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_08_135428) do
     t.datetime "updated_at", null: false
     t.index ["moderator_id"], name: "index_subs_on_moderator_id"
     t.index ["name"], name: "index_subs_on_name", unique: true
+  end
+
+  create_table "user_votes", force: :cascade do |t|
+    t.integer "value", null: false
+    t.integer "user_id", null: false
+    t.string "votable_type", null: false
+    t.integer "votable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "votable_type", "votable_id"], name: "index_user_votes_on_user_id_and_votable_type_and_votable_id", unique: true
+    t.index ["user_id"], name: "index_user_votes_on_user_id"
+    t.index ["votable_type", "votable_id"], name: "index_user_votes_on_votable_type_and_votable_id"
   end
 
   create_table "users", force: :cascade do |t|

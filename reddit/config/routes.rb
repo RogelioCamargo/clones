@@ -8,6 +8,15 @@ Rails.application.routes.draw do
 	resources :subs, except: %i(destroy)
 	resources :posts, except: %i(index destroy) do
 		resources :comments, only: %i(new)
+		member do 
+			post :upvote 
+			post :downvote 
+		end
 	end
-	resources :comments, only: %i(create show)
+	resources :comments, only: %i(create show) do 
+		member do 
+			post :upvote 
+			post :downvote
+		end
+	end
 end
